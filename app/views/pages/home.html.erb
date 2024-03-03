@@ -1,14 +1,15 @@
 <% if user_signed_in? %>
   <!--mainpagew/buttons&footer-->
   <div class= "content">
-  <div class="banner" style= "background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_path 'galaxies.png' %>);">
-  <h1 class="position-top">Choose Your Path</h1>
-  <div class="d-grid gap-2 col-3 mx-auto">
-    <%= link_to 'Start New Story', new_story_path, class: "btn btn-primary" %>
-    <%= link_to 'Library', stories_path, class: "btn btn-success" %>
-    <%= link_to 'Flashcards', flashcards_path, class:"btn btn-info" %>
-  </div>
-  </div>
+    
+    <div class="banner" style= "background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_path 'galaxies.png' %>);">
+      <h1 class="align-middle align-top">Choose Your Path</h1>
+      <div class="d-grid gap-4 col-6 mx-auto new-story-form form make-story-button ">
+        <%= link_to 'Start New Story', new_story_path, class: "btn btn-primary" %>
+        <%= link_to 'Library', stories_path, class: "btn btn-success" %>
+        <%= link_to 'Flashcards', flashcards_path, class:"btn btn-info" %>
+      </div>
+    </div>
   </div>
   <div class="footer">
     <div class="footer-links">
@@ -20,15 +21,15 @@
 <% else %>
   <!--banner&footer-->
   <div class= "content">
-  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_path 'splashpage.png' %>);">
-    <div class="container">
-      <h1>Story Time</h1>
-      <p>Learn English Through Your Own AI Storyteller</p>
-      <div class="d-flex justify-content-center">
-        <%=link_to 'Start Now', new_user_session_url, class: "btn btn-primary px-5" %>
+    <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= image_path 'splashpage.png' %>);">
+      <div class="container">
+        <h1>Story Time</h1>
+        <p>Learn English Through Your Own AI Storyteller</p>
+        <div class="d-flex justify-content-center">
+          <%=link_to 'Start Now', new_user_session_url, class: "btn btn-primary px-5" %>
+        </div>
       </div>
     </div>
-  </div>
   </div>
   <div class="footer">
     <div class="footer-links">
