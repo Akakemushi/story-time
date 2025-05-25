@@ -1,0 +1,38 @@
+.login_title {
+  color: $light-gray;
+}
+
+.login_links {
+  color: $light-gray;
+  font-size: 20px;
+}
+
+.simple_form {
+  background-color: $gray;
+  width: 400px;
+  margin-left: calc((100vw - 400px)/2);
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 20px;
+
+  .btn {
+    background-color: $green;
+    box-shadow: 5px 5px 10px black;
+    font-size: 24px;
+    font-weight: 200;
+    color: black;
+  }
+
+  .form-inputs {
+    width: 90%;
+    margin-left: 5%;
+
+    label {
+      color: $light-gray;
+    }
+
+    .optional {
+      max-width: 350px;
+    }
+  }
+}
