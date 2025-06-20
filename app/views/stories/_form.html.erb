@@ -2,74 +2,82 @@
   <!-- CSRF Token for security -->
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
-
-
+  <!-- Genre Section -->
   <label for="genre">Genre:</label>
   <fieldset name="genre" class="image-radial-selector">
-    <input type="radio" name="choice" id="adventure" class="input-hidden"/>
+    <!-- CHANGED: name="genre", value=... -->
+    <input type="radio" name="genre" id="adventure" value="adventure" class="input-hidden"/> <!-- CHANGED -->
     <label for="adventure">
       <%= image_tag "mountain_icon.png", alt: "adventure story button" %>
     </label>
-    <input type="radio" name="choice" id="fairy-tale" class="input-hidden"/>
+    <input type="radio" name="genre" id="fairy-tale" value="fairy-tale" class="input-hidden"/> <!-- CHANGED -->
     <label for="fairy-tale">
       <%= image_tag "castle_icon.png", alt: "fairy-tale story button" %>
     </label>
-    <input type="radio" name="choice" id="romance" class="input-hidden"/>
+    <input type="radio" name="genre" id="romance" value="romance" class="input-hidden"/> <!-- CHANGED -->
     <label for="romance">
       <%= image_tag "heart_icon.png", alt: "romance story button" %>
     </label>
-    <input type="radio" name="choice" id="sci-fi" class="input-hidden"/>
+    <input type="radio" name="genre" id="sci-fi" value="sci-fi" class="input-hidden"/> <!-- CHANGED -->
     <label for="sci-fi">
       <%= image_tag "robot_icon.png", alt: "sci-fi story button" %>
     </label>
-    <input type="radio" name="choice" id="horror" class="input-hidden"/>
+    <input type="radio" name="genre" id="horror" value="horror" class="input-hidden"/> <!-- CHANGED -->
     <label for="horror">
       <%= image_tag "skull_icon.png", alt: "horror story button" %>
     </label>
-    <input type="radio" name="choice" id="fantasy" class="input-hidden"/>
+    <input type="radio" name="genre" id="fantasy" value="fantasy" class="input-hidden"/> <!-- CHANGED -->
     <label for="fantasy">
       <%= image_tag "dragon_icon.png", alt: "fantasy story button" %>
     </label>
-    <input type="radio" name="choice" id="mystery" class="input-hidden"/>
+    <input type="radio" name="genre" id="mystery" value="mystery" class="input-hidden"/> <!-- CHANGED -->
     <label for="mystery">
       <%= image_tag "stranger_icon.png", alt: "mystery story button" %>
     </label>
   </fieldset>
 
- <label for="length">Story Length:</label>
+  <!-- Length Section -->
+  <label for="length">Story Length:</label>
   <fieldset name="length" class="text-radial-selector">
-    <input type="radio" name="choice 2" id="short" class="input-hidden"/>
+    <!-- CHANGED: name="length", value=... -->
+    <input type="radio" name="length" id="short" value="short" class="input-hidden"/> <!-- CHANGED -->
     <label for="short">
       <h2><strong>Short</strong></h2>
     </label>
-    <input type="radio" name="choice 2" id="medium" class="input-hidden"/>
+    <input type="radio" name="length" id="medium" value="medium" class="input-hidden"/> <!-- CHANGED -->
     <label for="medium">
       <h2><strong>Medium</strong></h2>
     </label>
-    <input type="radio" name="choice 2" id="long" class="input-hidden"/>
+    <input type="radio" name="length" id="long" value="long" class="input-hidden"/> <!-- CHANGED -->
     <label for="long">
       <h2><strong>Long</strong></h2>
     </label>
   </fieldset>
 
- <label for="difficulty">English Difficulty:</label>
+  <!-- Difficulty Section -->
+  <label for="difficulty">English Difficulty:</label>
   <fieldset name="difficulty" class="text-radial-selector">
-    <input type="radio" name="choice 3" id="beginner" class="input-hidden"/>
+    <!-- CHANGED: name="difficulty", value=... -->
+    <input type="radio" name="difficulty" id="beginner" value="Beginner" class="input-hidden"/> <!-- CHANGED -->
     <label for="beginner">
       <h3><strong>Beginner</strong></h3>
     </label>
-    <input type="radio" name="choice 3" id="intermediate" class="input-hidden"/>
+    <input type="radio" name="difficulty" id="intermediate" value="Intermediate" class="input-hidden"/> <!-- CHANGED -->
     <label for="intermediate">
       <h3><strong>Intermediate</strong></h3>
     </label>
-    <input type="radio" name="choice 3" id="advanced" class="input-hidden"/>
+    <input type="radio" name="difficulty" id="advanced" value="Advanced" class="input-hidden"/> <!-- CHANGED -->
     <label for="advanced">
       <h3><strong>Advanced</strong></h3>
     </label>
   </fieldset>
 
+  <!-- Themes Section -->
   <label for="themes">Story Themes: (separated by commas)</label>
   <textarea name="themes" id="themes" class="text-input" placeholder="Example: a purple giraffe, a man named Rolo, the best coffee in the world"></textarea>
+  <!-- name="themes" was already correct -->
+
+  <!-- Submit Button -->
   <div class="d-flex justify-content-center">
     <input type="submit" value="Let's Read" class="btn btn-success make-story-button">
   </div>
