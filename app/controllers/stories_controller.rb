@@ -12,7 +12,7 @@ class StoriesController < ApplicationController
   def index
     @stories = Story.all
     @completed_stories = Story.all.reject do |story|
-      segments = StorySegment.where(story: story).where.not(order: nil).sort_by(&:order)
+      segments = StorySegment.where(story: story).sort_by(&:order)
       last_segment = JSON.parse(segments.last.message)
       last_segment["choices"]
     end
