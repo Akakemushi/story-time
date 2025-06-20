@@ -34,7 +34,7 @@
         <% elsif @choices.present? %>
           <div data-controller="segment-subscription" data-segment-subscription-segment-id-value="<%= @story_segment.id %>">
             <div class="d-flex justify-content-center">
-              <%= simple_form_for [@story_segment.story, StorySegment.new] do |f| %>
+              <%= simple_form_for [@story_segment.story, StorySegment.new], html: { class: 'story_choice' } do |f| %>
                 <%= f.input :cache_id_1, as: :hidden, input_html: { value: "", data: { segment_subscription_target: "cacheIdOne" } } %>
                 <%= f.input :previous_story_segment_id, as: :hidden, input_html: { value: @story_segment.id } %>
                 <%= f.input :choice, as: :hidden, input_html: { value: "1"} %>
@@ -42,7 +42,7 @@
               <% end %>
             </div>
             <div class="d-flex justify-content-center">
-              <%= simple_form_for [@story_segment.story, StorySegment.new] do |f| %>
+              <%= simple_form_for [@story_segment.story, StorySegment.new], html: { class: 'story_choice' } do |f| %>
                 <%= f.input :cache_id_2, as: :hidden, input_html: { value: "", data: { segment_subscription_target: "cacheIdTwo" } } %>
                 <%= f.input :previous_story_segment_id, as: :hidden, input_html: { value: @story_segment.id } %>
                 <%= f.input :choice, as: :hidden, input_html: { value: "2"} %>

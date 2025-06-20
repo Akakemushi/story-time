@@ -52,10 +52,14 @@
     width: 100%;
   }
 
+  hidden {
+    margin: 0px;
+  }
+
   .choice-btn {
     white-space: normal;
-    font-size: 22px;
-    line-height: 1.2;
+    font-size: 20px;
+    line-height: 1;
   }
 }
 
