@@ -1,0 +1,18 @@
+current directory: /home/akakemushi/code/Akakemushi/story-time/vendor/bundle/ruby/3.1.0/gems/cgi-0.4.2/ext/cgi/escape
+/home/akakemushi/.rbenv/versions/3.1.2/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/akakemushi/code/Akakemushi/story-time/vendor/bundle/ruby/3.1.0/gems/cgi-0.4.2/ext/cgi/escape
+make DESTDIR\= sitearchdir\=./.gem.20250530-30672-hu3zx7 sitelibdir\=./.gem.20250530-30672-hu3zx7 clean
+
+current directory: /home/akakemushi/code/Akakemushi/story-time/vendor/bundle/ruby/3.1.0/gems/cgi-0.4.2/ext/cgi/escape
+make DESTDIR\= sitearchdir\=./.gem.20250530-30672-hu3zx7 sitelibdir\=./.gem.20250530-30672-hu3zx7
+compiling escape.c
+linking shared-object cgi/escape.so
+
+current directory: /home/akakemushi/code/Akakemushi/story-time/vendor/bundle/ruby/3.1.0/gems/cgi-0.4.2/ext/cgi/escape
+make DESTDIR\= sitearchdir\=./.gem.20250530-30672-hu3zx7 sitelibdir\=./.gem.20250530-30672-hu3zx7 install
+/usr/bin/install -c -m 0755 escape.so ./.gem.20250530-30672-hu3zx7/cgi
+
+current directory: /home/akakemushi/code/Akakemushi/story-time/vendor/bundle/ruby/3.1.0/gems/cgi-0.4.2/ext/cgi/escape
+make DESTDIR\= sitearchdir\=./.gem.20250530-30672-hu3zx7 sitelibdir\=./.gem.20250530-30672-hu3zx7 clean
