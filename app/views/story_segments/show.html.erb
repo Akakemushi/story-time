@@ -25,8 +25,12 @@
       </div>
     </div>
     <div class="story-column-right">
-      <div class="story-segment-image ">
-        <%= image_tag cl_image_path(@story_segment.photo.key, crop: :fill), alt: "AI picture" %>
+      <div class="story-segment-image">
+        <% if @story_segment.photo.present? && @story_segment.photo.key.present? %>
+          <%= image_tag cl_image_path(@story_segment.photo.key, crop: :fill), alt: "AI picture" %>
+        <% else %>
+          <%= image_tag "placeholder.png", alt: "No image available" %>
+        <% end %>
       </div>
       <div>
         <% if @next_segment.present? %>
