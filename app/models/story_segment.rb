@@ -37,27 +37,20 @@ class StorySegment < ApplicationRecord
   end
 
   def set_photo(prompt)
-    client = OpenAI::Client.new
-    response = client.images.generate(parameters:
-      {
-        model: "dall-e-3",
-        prompt: "#{prompt}",
-        size: "1024x1024"
-      })
-    url = response["data"][0]["url"]
-    file = URI.open(url)
+    url = OpenaiService.generate_image(prompt)
     puts "MMMMMMMMMMMMMMMMMMMMMMMMMMMMM  Url below of the generated image below..."
     puts url
 
+    file = URI.open(url)
     photo.purge if photo.attached?
-    photo.attach(io: file, filename: "#{@id}.png", content_type: "image/png")
+    photo.attach(io: file, filename: "#{id}.png", content_type: "image/png")
     return photo
   end
 
   def quick_set_photo(url)
     file = URI.open(url)
     photo.purge if photo.attached?
-    photo.attach(io: file, filename: "#{@id}.png", content_type: "image/png")
+    photo.attach(io: file, filename: "#{id}.png", content_type: "image/png")
     return photo
   end
 end
