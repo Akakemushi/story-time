@@ -3,7 +3,8 @@
   <div class="container">
     <div class="story-cards">
       <% @stories.each do |story|%>
-        <div class="card-story" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= story.story_segments.last.photo.attached? ? cl_image_path(story.story_segments.last.photo.key, crop: :fill) : image_path("galaxies.png") %>)">
+        <% last_segment = story.story_segments.last %>
+        <div class="card-story" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= last_segment&.photo&.attached? ? cl_image_path(last_segment.photo.key, crop: :fill) : image_path("galaxies.png") %>)">
           <div style="height: 50px; text-align: end; width: 100%;">
             <% if @completed_stories.include?(story) %>
               <%= image_tag "green_check_circle_shadow.png", alt: "bookmark", class: "h-100" %>

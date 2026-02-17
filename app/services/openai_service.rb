@@ -2,6 +2,8 @@ require "openai"
 require "json"
 
 class OpenaiService
+  class ApiError < StandardError; end
+
   attr_reader :client, :prompt
 
   def initialize(prompt)
@@ -13,47 +15,73 @@ class OpenaiService
   def call
     response = client.chat(
       parameters: {
-        model: "gpt-3.5-turbo",
+        model: "gpt-4o-mini",
         response_format: {
           type: "json_object"
         },
         messages: [{ role: "system", content: prompt }],
         temperature: 0.8,
         stream: false,
-        max_tokens: 4096
+        max_completion_tokens: 4096
       }
     )
-    return response["choices"][0]["message"]["content"]
+    extract_chat_content(response)
   end
 
   def add_segment_call
     response = client.chat(
       parameters: {
-        model: "gpt-3.5-turbo",
+        model: "gpt-4o-mini",
         response_format: {
           type: "json_object"
         },
         messages: prompt,
         temperature: 0.8,
         stream: false,
-        max_tokens: 4096
+        max_completion_tokens: 4096
       }
     )
-    return response["choices"][0]["message"]["content"]
+    extract_chat_content(response)
   end
 
   def generate_art_prompt
     response = client.chat(
       parameters: {
-        model: "gpt-3.5-turbo",
+        model: "gpt-4o-mini",
         messages: [{ role: "system", content: "You are an Dall-E-3 art prompt generator. Your job is to read the story given to you by the user, and create a Dall-e prompt that will generate an image that captures what is happening in the story. Try to make your prompt summarize what is happening in the story, and prioritize creating images that depict interactions between characters and or objects.  Pay close attention to adjectives used. Also try to grasp the mood and setting of the story and apply it to the background in your prompt. The image style should be in the style of fantasy art. You may use the works of artists such as Keith Parkinson, Michael Whelan, or Gerald Brom for reference."},
                    { role: "user", content: prompt }],
         temperature: 0.7,
         stream: false,
-        max_tokens: 4000
+        max_completion_tokens: 4000
       }
     )
-    return response["choices"][0]["message"]["content"]
+    extract_chat_content(response)
+  end
+
+  def self.generate_image(prompt)
+    client = OpenAI::Client.new
+    response = client.images.generate(parameters: {
+      model: "dall-e-3",
+      prompt: prompt,
+      size: "1024x1024"
+    })
+    if response["error"]
+      raise ApiError, "DALL-E API error: #{response['error']['message']}"
+    end
+    url = response.dig("data", 0, "url")
+    raise ApiError, "DALL-E returned no image URL" unless url
+    url
+  end
+
+  private
+
+  def extract_chat_content(response)
+    if response["error"]
+      raise ApiError, "OpenAI API error: #{response['error']['message']}"
+    end
+    content = response.dig("choices", 0, "message", "content")
+    raise ApiError, "OpenAI returned empty response" unless content
+    content
   end
 
 

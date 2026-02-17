@@ -5,21 +5,27 @@ class StoriesController < ApplicationController
     @story = Story.find(params[:id])
     @segments = StorySegment.where(story: @story).sort_by(&:order)
     @story_segment = @segments.last
-    data = JSON.parse(@story_segment.message)
-    @choices_exist = data.key?("choices")
+    if @story_segment&.role == "assistant"
+      data = JSON.parse(@story_segment.message)
+      @choices_exist = data.key?("choices")
+    else
+      @choices_exist = false
+    end
   end
 
   def index
-    @stories = Story.all
-    @completed_stories = Story.all.reject do |story|
-      segments = StorySegment.where(story: story).sort_by(&:order)
-      last_segment = JSON.parse(segments.last.message)
-      last_segment["choices"]
+    @stories = Story.where.not(title: [nil, ""])
+    @completed_stories = @stories.select do |story|
+      last_assistant = StorySegment.where(story: story, role: "assistant").order(:order).last
+      next false unless last_assistant
+      data = JSON.parse(last_assistant.message)
+      !data["choices"]
     end
-    @unfinished_stories = Story.all.select do |story|
-      segments = StorySegment.where(story: story).sort_by(&:order)
-      last_segment = JSON.parse(segments.last.message)
-      last_segment["choices"]
+    @unfinished_stories = @stories.select do |story|
+      last_assistant = StorySegment.where(story: story, role: "assistant").order(:order).last
+      next false unless last_assistant
+      data = JSON.parse(last_assistant.message)
+      data["choices"].present?
     end
   end
 

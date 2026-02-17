@@ -26,7 +26,7 @@
     </div>
     <div class="story-column-right">
       <div class="story-segment-image ">
-        <%= image_tag cl_image_path(@story_segment.photo.key, crop: :fill), alt: "AI picture" %>
+        <%= @story_segment.photo.attached? ? image_tag(cl_image_path(@story_segment.photo.key, crop: :fill), alt: "AI picture") : image_tag("failed_image_gen.png", alt: "Image generation failed") %>
       </div>
       <div>
         <% if @next_segment.present? %>
