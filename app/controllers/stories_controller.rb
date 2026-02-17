@@ -98,4 +98,16 @@ class StoriesController < ApplicationController
     completed_template = template % template_variables
     return completed_template
   end
+
+  def story_unfinished?(story)
+    segments = story.story_segments.select { |s| s.order.present? }.sort_by(&:order)  # Written this way to prevent N+1 queries
+    last_segment = segments.last
+    return true if last_segment.nil? || last_segment.message.blank?
+    parsed = JSON.parse(last_segment.message)
+    parsed["choices"].present?
+  rescue JSON::ParserError => e
+    Rails.logger.warn("Invalid JSON in story segment ID=#{last_segment&.id}: #{e.message}")
+    true
+  end
+
 end
