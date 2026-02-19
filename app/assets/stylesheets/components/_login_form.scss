@@ -36,3 +36,22 @@
     }
   }
 }
+
+.simple_form.signup-form {
+  width: auto;
+  max-width: 740px;
+  margin: 0 auto;
+
+  .form-row {
+    @media (min-width: 768px) {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 12px;
+
+      > div {
+        flex-grow: 1;
+      }
+    }
+  }
+}

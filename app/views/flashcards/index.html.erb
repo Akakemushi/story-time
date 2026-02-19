@@ -1,26 +1,31 @@
 <div class="flashcards-directory">
   <h1 class="text-center my-3">Flashcards Directory</h1>
-  <!--Search bar with title and date-->
-  <div class="form">
-    <%= form_tag flashcards_path, method: :get do %>
-      <div>
-        <%= text_field_tag :search_query, @search_query, placeholder: 'Search by Title or Date' %>
-      </div>
-      <div>
-        <%= submit_tag 'Search' %>
+  <% if @flashcards.empty? %>
+    <h1 class="text-center mt-5" style="color: white;">You haven't saved any flashcards yet.</h1>
+  <% else %>
+    <!--Search bar with title and date-->
+    <div class="form">
+      <%= form_tag flashcards_path, method: :get do %>
+        <div>
+          <%= text_field_tag :search_query, @search_query, placeholder: 'Search by Title or Date' %>
+        </div>
+        <div>
+          <%= submit_tag 'Search' %>
+        </div>
+      <% end %>
+    </div>
+    <!--Flashcards-->
+    <div class="flash-cards-container">
+    <% @flashcards.each do |flashcard|%>
+      <div class="flip">
+        <div class="front" style="background-color: #ECE9EA ">
+          <h2 class=""><%= flashcard.excerpt %></h2>
+        </div>
+        <div class="back" style="background-color: #3F5A64">
+          <p><%= flashcard.answer %></p>
+        </div>
       </div>
     <% end %>
-  </div>
-  <!--Flashcards-->
-  <div class="flash-cards-container">
-  <% @flashcards.each do |flashcard|%>
-    <div class="flip">
-      <div class="front" style="background-color: #ECE9EA ">
-        <h2 class=""><%= flashcard.excerpt %></h2>
-      </div>
-      <div class="back" style="background-color: #3F5A64">
-        <p><%= flashcard.answer %></p>
-      </div>
     </div>
   <% end %>
-  </div>
+</div>

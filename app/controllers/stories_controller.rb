@@ -14,7 +14,7 @@ class StoriesController < ApplicationController
   end
 
   def index
-    @stories = Story.where.not(title: [nil, ""])
+    @stories = current_user.stories.where.not(title: [nil, ""])
     @completed_stories = @stories.select do |story|
       last_assistant = StorySegment.where(story: story, role: "assistant").order(:order).last
       next false unless last_assistant

@@ -1,23 +1,27 @@
 <div class="library-index">
   <h1 class="text-center my-3">Library</h1>
-  <div class="container">
-    <div class="story-cards">
-      <% @stories.each do |story|%>
-        <% last_segment = story.story_segments.last %>
-        <div class="card-story" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= last_segment&.photo&.attached? ? cl_image_path(last_segment.photo.key, crop: :fill) : image_path("galaxies.png") %>)">
-          <div style="height: 50px; text-align: end; width: 100%;">
-            <% if @completed_stories.include?(story) %>
-              <%= image_tag "green_check_circle_shadow.png", alt: "bookmark", class: "h-100" %>
-            <% end %>
+  <% if @stories.empty? %>
+    <h1 class="text-center mt-5" style="color: white;">You haven't created any stories yet.</h1>
+  <% else %>
+    <div class="container">
+      <div class="story-cards">
+        <% @stories.each do |story|%>
+          <% last_segment = story.story_segments.last %>
+          <div class="card-story" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= last_segment&.photo&.attached? ? cl_image_path(last_segment.photo.key, crop: :fill) : image_path("galaxies.png") %>)">
+            <div style="height: 50px; text-align: end; width: 100%;">
+              <% if @completed_stories.include?(story) %>
+                <%= image_tag "green_check_circle_shadow.png", alt: "bookmark", class: "h-100" %>
+              <% end %>
+            </div>
+            <p><%= link_to story.title, story_path(story), style: "text-decoration: none; color: white;" %></p>
+            <div style="height: 110px;">
+              <%= link_to story_flashcards_path(story) do %>
+                <%= image_tag 'flashcards.png', alt: 'Flashcards', style: "height: 100%" %>
+              <% end %>
+            </div>
           </div>
-          <p><%= link_to story.title, story_path(story), style: "text-decoration: none; color: white;" %></p>
-          <div style="height: 110px;">
-            <%= link_to story_flashcards_path(story) do %>
-              <%= image_tag 'flashcards.png', alt: 'Flashcards', style: "height: 100%" %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 </div>
