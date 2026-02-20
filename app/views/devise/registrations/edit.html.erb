@@ -4,7 +4,17 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :first_name, required: true, autofocus: true %>
+    <div class="text-center mb-3">
+      <% if resource.avatar.attached? %>
+        <%= cl_image_tag(resource.avatar.key, width: 120, height: 120, crop: :fill, gravity: :face, class: "rounded-circle") %>
+      <% else %>
+        <span class="avatar-placeholder avatar-placeholder-lg"><%= resource.username.first.upcase %></span>
+      <% end %>
+    </div>
+    <%= f.input :avatar, as: :file, label: "Profile photo",
+                hint: "JPEG, PNG, GIF, or WebP. Max 5MB.",
+                input_html: { accept: "image/jpeg,image/png,image/gif,image/webp" } %>
+    <%= f.input :first_name, required: true %>
     <%= f.input :last_name, required: true %>
     <%= f.input :middle_name, required: false %>
     <%= f.input :username, required: true,
