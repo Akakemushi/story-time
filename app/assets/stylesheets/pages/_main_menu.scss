@@ -1,118 +1,236 @@
-.main-menu-content {
-  background-image: url("galaxies.jpg");
-  background-size: cover;
+// ───────────────────────────────────────────
+// Main Page — Storybook Dashboard
+// ───────────────────────────────────────────
+
+.main-page {
+  position: relative;
+  min-height: calc(100vh - 56px); // full viewport minus navbar
+  overflow: hidden;
+  background: linear-gradient(175deg, darken($gray, 8%) 0%, $gray 40%, lighten($gray, 4%) 100%);
+}
+
+// ── Parallax Background ─────────────────────
+
+.parallax-bg {
+  position: absolute;
+  inset: -60px; // extra bleed so layers don't reveal edges when shifted
+  z-index: 0;
+  pointer-events: none;
+}
+
+.parallax-layer {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  transition: transform 0.05s linear;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+// ── Foreground Content (stationary) ─────────
+
+.main-page-content {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
-  // background: fixed;
-  // overflow: auto;
-  height: 100%;
+  align-items: center;
+  padding: 0 20px 40px;
+  min-height: calc(100vh - 56px);
+}
 
-  .main-menu-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2%;
-    margin: 50px 20px 0 20px;
-    flex-grow: 1;
+// ── Header ──────────────────────────────────
 
-    .main-menu-button {
-      flex-basis: 25%;
+.main-page-header {
+  width: 100%;
+  text-align: center;
+  padding: 48px 20px 32px;
+  position: relative;
 
-      img {
-        transition: 0.5s;
-      }
-
-      :hover img {
-        background-image: radial-gradient(0% white, 100% black);
-        background-blend-mode: multiply;
-        scale: 115%;
-        transition: 0.5s;
-      }
-
-      :hover .main-menu-button-text {
-        opacity: 100%;
-        transition-delay: 0.3s;
-        text-shadow: 0 0 5px white;
-        transition: 0.5s;
-        translate: 0 -700%;
-        scale: 180%;
-        color: $light-gray;
-        text-decoration: none;
-      }
-
-
-    }
-
-    .new-story-button {
-
-      img {
-        width: 90%;
-        height: auto;
-      }
-    }
-
-    .library-button {
-      margin-top: 3%;
-      img {
-        width: 75%;
-        height: auto;
-      }
-    }
-
-    .flashcards-button {
-      margin-top: 6%;
-      img {
-        width: 100%;
-        height: auto;
-      }
-    }
+  // Decorative rule beneath header
+  &::after {
+    content: "~";
+    display: block;
+    margin: 20px auto 0;
+    font-size: 28px;
+    color: rgba($light-gray, 0.3);
+    letter-spacing: 12px;
+    font-family: $headers-font;
   }
+}
 
-  .main-menu-button-text {
-    opacity: 0%;
-    transition: 0.5s;
+.main-page-title {
+  font-family: $headers-font;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: $light-gray;
+  margin: 0;
+  padding: 12px 40px;
+  background: linear-gradient(
+    to right,
+    rgba($gray, 0) 0%,
+    rgba(lighten($gray, 6%), 0.7) 20%,
+    rgba(lighten($gray, 6%), 0.7) 80%,
+    rgba($gray, 0) 100%
+  );
+  display: inline-block;
+  letter-spacing: 1px;
+}
+
+.main-page-subtitle {
+  font-family: $body-font;
+  font-size: clamp(1.15rem, 2.5vw, 1.6rem);
+  color: darken($gray, 20%);
+  margin: 12px 0 0;
+  font-style: italic;
+}
+
+// ── Card Grid ───────────────────────────────
+
+.main-page-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  width: 100%;
+  max-width: 960px;
+  margin-top: 12px;
+}
+
+// ── Individual Card ─────────────────────────
+
+.main-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  padding: 32px 20px 28px;
+  border-radius: 16px;
+  background: linear-gradient(
+    160deg,
+    rgba(79, 113, 125, 0.9) 0%,
+    rgba(71, 101, 113, 0.7) 100%
+  );
+  border: 1px solid rgba($light-gray, 0.08);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba($light-gray, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-6px);
+    box-shadow:
+      0 8px 28px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba($light-gray, 0.08);
+    border-color: rgba($blue, 0.3);
     text-decoration: none;
-    text-shadow: none;
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
-    color: white;
-    mix-blend-mode: difference;
   }
 
-  .test {
-    background-image: linear-gradient(to right, #ece9ea00 0%, #ece9ea9a 20%, #ECE9EA 50%, #ece9ea9a 80%, #ece9ea00 100% );
+  &:active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  }
+}
 
-    .menu-message {
-      text-align: center;
-      margin-top: 20px;
+.main-card-icon {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
 
-      h1 {
-        // color: #fff;
-        font-size: 4vw;
-        // text-transform: uppercase;
-        // font-weight: 700;
-        // font-family: "Josefin Sans", sans-serif;
-        background-image: url("galaxies.png"), linear-gradient(to right,#bedaf22a 10%, #46afe026 50%, #77bcdd26 60%);
-        // background-size: auto auto;
-        // background-clip: border-box;
-        background-size: 200% auto;
-        // color: #fff;
-        background-clip: text;
-        text-fill-color: transparent;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: textclip 30s linear infinite;
-        // text-shadow: 0 5 3px white;
-        // -webkit-text-stroke: 1px rgba(224, 222, 241, 0.677);
-        // display: inline-block;
-      }
-    }
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+    transition: transform 0.3s ease;
   }
 
-  @keyframes textclip {
-    to {
-      background-position: 200% -50%;
-    }
+  .main-card:hover & img {
+    transform: scale(1.08);
+  }
+}
+
+.main-card-title {
+  font-family: $headers-font;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  color: $light-gray;
+  margin: 0 0 6px;
+  letter-spacing: 0.5px;
+  // Override global h1 gradient background
+  background: none;
+  padding: 0;
+  display: block;
+}
+
+.main-card-desc {
+  font-family: $body-font;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  color: rgba($light-gray, 0.5);
+  margin: 0;
+  font-style: italic;
+}
+
+// ── Mobile: Stack cards vertically ──────────
+
+@media (max-width: 767px) {
+  .main-page-content {
+    padding: 0 16px 32px;
+  }
+
+  .main-page-header {
+    padding: 32px 16px 24px;
+  }
+
+  .main-page-cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 400px;
+  }
+
+  .main-card {
+    flex-direction: row;
+    text-align: left;
+    padding: 20px 24px;
+    gap: 20px;
+  }
+
+  .main-card-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .main-card-body {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+// ── Tablet: 3 columns still, but tighter ────
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .main-page-cards {
+    gap: 20px;
+    max-width: 720px;
+  }
+
+  .main-card {
+    padding: 24px 16px;
+  }
+
+  .main-card-icon {
+    width: 80px;
+    height: 80px;
   }
 }
