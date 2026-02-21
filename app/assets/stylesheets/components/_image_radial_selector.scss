@@ -2,27 +2,55 @@
   display: flex;
   margin-bottom: 20px;
   justify-content: space-around;
+  align-items: flex-start;
 
   .input-hidden {
     position: absolute;
     left: -9999px;
   }
 
-  input[type=radio]:checked + label>img {
-    border-bottom: 3px solid transparent;
-    border-image: linear-gradient(to right, rgba(255, 0, 102, 0) 0%, #161f2200 10%, #A2E7FF 20%, #A2E7FF 80%, #161f2200 90%, rgba(255, 204, 0, 0) 100%); /* Define the gradient */
-    border-image-slice: 1;
-    filter: brightness(300%);
+  // Make each label a vertical stack: icon on top, text below
+  input[type=radio] + label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    gap: 0;
   }
 
-  input[type=radio] + label>img {
+  // --- Icon styles ---
+
+  input[type=radio] + label > img {
     width: 80px;
     height: 80px;
     transition: 500ms all;
     filter: brightness(40%);
   }
 
-  input[type=radio]:checked + label>img {
-    transform: scale(120%)
+  input[type=radio]:checked + label > img {
+    filter: brightness(300%);
+    transform: scale(120%);
+  }
+
+  // --- Genre label text ---
+
+  .genre-label {
+    display: block;
+    font-size: 18px;
+    font-family: $body-font;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #161F22;
+    transition: 500ms all;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  input[type=radio]:checked + label > .genre-label {
+    color: #A2E7FF;
+    text-shadow: 0 0 8px rgba(#A2E7FF, 0.4);
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(to right, rgba(255, 0, 102, 0) 0%, #161f2200 10%, #A2E7FF 20%, #A2E7FF 80%, #161f2200 90%, rgba(255, 204, 0, 0) 100%);
+    border-image-slice: 1;
   }
 }

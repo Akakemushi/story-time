@@ -1,35 +1,57 @@
+<div class="main-page" data-controller="parallax">
+  <div class="parallax-bg" data-parallax-target="scene">
+    <div class="parallax-layer" data-parallax-target="layer" data-parallax-speed="0">
+      <%= image_tag "story-time-layer-1.png", alt: "", role: "presentation" %>
+    </div>
+    <div class="parallax-layer" data-parallax-target="layer" data-parallax-speed="0.33">
+      <%= image_tag "story-time-layer-2.png", alt: "", role: "presentation" %>
+    </div>
+    <div class="parallax-layer" data-parallax-target="layer" data-parallax-speed="0.66">
+      <%= image_tag "story-time-layer-3.png", alt: "", role: "presentation" %>
+    </div>
+    <div class="parallax-layer" data-parallax-target="layer" data-parallax-speed="1">
+      <%= image_tag "story-time-layer-4.png", alt: "", role: "presentation" %>
+    </div>
+  </div>
 
-  <%# <div class="loading-animation-container">
-    <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-      <rect width="100" height="100" fill="black" rx="15" class="filter"/>
-    </svg>
-    <%= image_tag "love_death_robots.png", alt: "text" %> 
-  <%# </div> %>
-  <!--mainpagew/buttons&footer-->
-  <div class= "main-menu-content">
-  <div class="test">
-    <div class="menu-message">
-      <h1>Welcome back, Reader!</h1>
+  <div class="main-page-content">
+    <div class="main-page-header">
+      <div class="main-page-header-inner">
+        <h1 class="main-page-title">Welcome back, Reader!</h1>
+        <p class="main-page-subtitle">What would you like to do today?</p>
+      </div>
     </div>
-    </div>
-    <div class="main-menu-buttons">
-      <%= link_to new_story_path, class: "main-menu-button new-story-button" do %>
-        <div>
-          <%= image_tag "inkpot-small.png", alt: "text" %>
-          <h2 class="main-menu-button-text">New Story</h2>
+
+    <div class="main-page-cards">
+      <%= link_to new_story_path, class: "main-card" do %>
+        <div class="main-card-icon">
+          <%= image_tag "inkpot-small.png", alt: "Ink pot" %>
+        </div>
+        <div class="main-card-body">
+          <h2 class="main-card-title">New Story</h2>
+          <p class="main-card-desc">Begin a brand new adventure</p>
         </div>
       <% end %>
-      <%= link_to stories_path, class: "main-menu-button library-button" do %>
-        <div>
-          <%= image_tag "bookpiles-small.png", alt: "text" %>
-          <h2 class="main-menu-button-text">Library</h2>
+
+      <%= link_to stories_path, class: "main-card" do %>
+        <div class="main-card-icon">
+          <%= image_tag "bookpiles-small.png", alt: "Stack of books" %>
+        </div>
+        <div class="main-card-body">
+          <h2 class="main-card-title">Library</h2>
+          <p class="main-card-desc">Continue a story in progress</p>
         </div>
       <% end %>
-      <%= link_to flashcards_path, class:"main-menu-button flashcards-button"  do %>
-        <div>
-          <%= image_tag "gradcap-small.png", alt: "text" %>
-          <h2 class="main-menu-button-text">Study</h2>
+
+      <%= link_to flashcards_path, class: "main-card" do %>
+        <div class="main-card-icon">
+          <%= image_tag "gradcap-small.png", alt: "Graduation cap" %>
+        </div>
+        <div class="main-card-body">
+          <h2 class="main-card-title">Study</h2>
+          <p class="main-card-desc">Review your flashcards</p>
         </div>
       <% end %>
     </div>
   </div>
+</div>
